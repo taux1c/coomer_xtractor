@@ -7,9 +7,10 @@ from bs4 import BeautifulSoup as BS
 from coomer_xtractor.browser_vars import headers
 from coomer_xtractor.scrapers.download import download
 
-requests_semaphore = Semaphore(20)
+
 
 async def find_files(urls, profile):
+    requests_semaphore = Semaphore(profile.max_concurrent_requests)
     site = urls[0][0].split("/")[3]
     user = urls[0][0].split("/")[5]
     all_file_links = []

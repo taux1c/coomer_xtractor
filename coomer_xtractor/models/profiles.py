@@ -1,6 +1,7 @@
 
 from json import dumps, loads
 from pathlib import Path
+import webbrowser
 
 
 from coomer_xtractor.config import profiles_folder
@@ -15,6 +16,7 @@ class User:
         self.save_location = None
         self.db_string = None
         self.max_concurrent_downloads = 10
+        self.max_concurrent_requests = 10
 
 
     def build(self):
@@ -27,6 +29,13 @@ class User:
                 break
             else:
                 print("Please enter a number greater than 0.")
+        while True:
+            self.max_concurrent_requests = int(input("How many concurrent requests do you want to make? (Default is 10): "))
+            if type(self.max_concurrent_requests) == int and self.max_concurrent_requests > 0:
+                break
+            else:
+                print("Please enter a number greater than 0.")
+
         self.db_string = f"sqlite:///{self.save_location}/posts.db"
         self.save()
 
@@ -81,3 +90,9 @@ async def delete_profile():
     p = select_profile()
     Path(profiles_folder, f"{p.display_name}.json").unlink()
     print(f"Deleted {p.display_name}.")
+
+def start():
+    try:
+        webbrowser.open("https://www.buymeacoffee.com/taux1c")
+    except:
+        print("Please consider supporting the developer by visiting https://www.buymeacoffee.com/taux1c")
