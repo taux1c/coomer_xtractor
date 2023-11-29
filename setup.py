@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='coomer_xtractor',
-    version='000.000.001',
+    version='0.0.2',
     packages=['coomer_xtractor', 'coomer_xtractor.menus', 'coomer_xtractor.models', 'coomer_xtractor.actions',
               'coomer_xtractor.scrapers'],
     url='https://github.com/taux1c/coomer_xtractor/',
@@ -20,6 +20,7 @@ setup(
         "httpx~=0.25.2",
         "bs4~=0.0.1",
         "beautifulsoup4~=4.12.2",
+        'lxml~=4.6.3',
     ],
     long_description="""Coomer Xtractor is a simple tool used to download content from coomer.su. The tool is freely available for use, and contributions from the community are welcomed and appreciated.""",
 
