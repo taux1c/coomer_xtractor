@@ -8,5 +8,5 @@ def find_images(soup):
         file_links = [x.get('href') for x in post_file_links]
         [media_links.append(x) for x in file_links if x not in media_links and x is not None]
     except Exception as e:
-        print(e)
+        print(f"Encountered {e} while trying to find images.")
     return media_links

@@ -31,13 +31,13 @@ async def find_files(urls, profile):
                             video_links = find_videos(post_videos)
                             if len(video_links) > 0:
                                 try:
-                                    tasks.append(loop.create_task(await download(video_links, profile, site, user)))
+                                    tasks.append(loop.create_task(download(video_links, profile, site, user)))
                                 except Exception as e:
-                                    print(e)
+                                    print(f"Encountered {e} while downloading {video_links}.")
                             image_links = find_images(soup)
                             if len(image_links) > 0:
                                 media_links.extend(image_links)
-                                tasks.append(loop.create_task(await download(media_links, profile, site, user)))
+                                tasks.append(loop.create_task(download(media_links, profile, site, user)))
                                 print(f"Found {len(image_links)} files in {url}.")
                         except Exception as e:
                             print(e)
