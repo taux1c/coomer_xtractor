@@ -32,8 +32,8 @@ async def find_files(urls, profile):
                                     source = video.find("source")
                                     src = source.get("src")
                                     video_links.append(src)
-                            print(video_links)
-                            loop.run_until_complete(await download(video_links, profile, site, user))
+                            if len(video_links) > 0:
+                                loop.run_until_complete(await download(video_links, profile, site, user))
                             post_file_links = post_files.find_all("a")
                             file_links = [x.get('href') for x in post_file_links]
                             [media_links.append(x) for x in file_links if x not in media_links and x is not None]
