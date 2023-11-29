@@ -21,13 +21,23 @@ async def find_files(urls, profile):
                     r = await client.get(url)
                     if r.status_code == 200:
                         try:
+                            media_links = []
                             soup = BS(r.content, 'lxml')
                             post_content = soup.find("div", class_="post__content")
                             post_files = soup.find("div", class_="post__files")
+                            post_videos = soup.find_all("video")
+                            video_links = []
+                            if post_videos:
+                                for video in post_videos:
+                                    source = video.find("source")
+                                    src = source.get("src")
+                                    video_links.append(src)
+                            print(video_links)
+                            loop.run_until_complete(await download(video_links, profile, site, user))
                             post_file_links = post_files.find_all("a")
                             file_links = [x.get('href') for x in post_file_links]
-                            file_links = [link for link in file_links if link is not None]
-                            loop.run_until_complete(await download(file_links, profile, site, user))
+                            [media_links.append(x) for x in file_links if x not in media_links and x is not None]
+                            loop.run_until_complete(await download(media_links, profile, site, user))
                             print(f"Found {len(file_links)} files in {url}.")
                         except Exception as e:
                             pass

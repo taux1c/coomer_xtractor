@@ -3,7 +3,16 @@ from httpx import AsyncClient
 import aiofiles
 from asyncio import Semaphore
 from pathlib import Path
+from sqlalchemy import create_engine, Column, Integer, Text
+from sqlalchemy.orm import declarative_base, sessionmaker
 
+
+Base = declarative_base()
+
+class SavedUrls(Base):
+    __tablename__ = "saved_urls"
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True, nullable=False)
+    url = Column(Text, unique=True)
 
 from coomer_xtractor.browser_vars import headers
 
@@ -19,7 +28,10 @@ async def download(urls, profile, site, user):
                 try:
                     r = await client.get(url)
                     if r.status_code == 200:
-                        file_name = url.split("f=")[-1]
+                        if "f=" in url:
+                            file_name = url.split("f=")[-1]
+                        else:
+                            file_name = url.split("/")[-1][-20:]
                         async with aiofiles.open(Path(download_path, file_name), "wb") as f:
                             await f.write(r.content)
                             print(f"Downloaded {file_name} to {download_path}.")

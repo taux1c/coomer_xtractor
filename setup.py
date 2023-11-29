@@ -19,8 +19,7 @@ setup(
         "aiofiles~=23.2.1",
         "httpx~=0.25.2",
         "bs4~=0.0.1",
-        "beautifulsoup4~=4.12.2",
-        'lxml~=4.6.3',
+        "beautifulsoup4~=4.12.2"
     ],
     long_description="""Coomer Xtractor is a simple tool used to download content from coomer.su. The tool is freely available for use, and contributions from the community are welcomed and appreciated.""",
 
