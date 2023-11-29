@@ -6,7 +6,7 @@ Welcome to coomer_xtractor! This project is designed for educational purposes an
 
 You can install `coomer_xtractor` using `pip`:
 
-```bash
+bash
 pip install coomer_xtractor
 
 Please note that pip must be installed in your environment.
