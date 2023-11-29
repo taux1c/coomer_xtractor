@@ -1,0 +1,4 @@
+aiofiles~=23.2.1
+httpx~=0.25.2
+bs4~=0.0.1
+beautifulsoup4~=4.12.2
