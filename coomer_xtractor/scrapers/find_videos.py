@@ -9,8 +9,8 @@ def find_videos(soup):
                 source = video.find("source")
                 src = source.get("src")
                 video_links.append(src)
-    except:
+    except Exception as e:
         video_links = []
-        pass
+        print(e)
 
     return video_links

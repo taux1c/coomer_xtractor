@@ -33,4 +33,4 @@ async def main_menu():
             else:
                 print("Invalid selection.")
         except Exception as e:
-            pass
+            print(e)
