@@ -19,11 +19,8 @@ class SavedUrl(Base):
         return f"{self.url}"
 
     def save(self, profile):
-        print("Saving to database.")
         engine = create_engine(profile.db_string)
-        print("Created engine.")
         Base.metadata.create_all(engine)
-        print("Created metadata.")
         Session = sessionmaker(bind=engine)
         with Session() as session:
             session.add(self)
