@@ -31,5 +31,5 @@ async def download(urls, profile, site, user, loop):
                             print(f"Downloaded {file_name} to {download_path}.")
                 except Exception as e:
                     print(f"Encountered {e} while trying to download {url}.")
-    loop.run_until_complete(await add_to_database(saved_urls, profile))
+    await add_to_database(saved_urls, profile)
 
