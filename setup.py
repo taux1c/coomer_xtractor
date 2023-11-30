@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='coomer_xtractor',
-    version='0.0.9',
+    version='0.0.10',
     packages=['coomer_xtractor', 'coomer_xtractor.menus', 'coomer_xtractor.models', 'coomer_xtractor.actions',
               'coomer_xtractor.scrapers'],
     url='https://github.com/taux1c/coomer_xtractor/',
