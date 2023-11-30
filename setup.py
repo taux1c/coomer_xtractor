@@ -21,6 +21,7 @@ setup(
         "bs4~=0.0.1",
         "beautifulsoup4~=4.12.2",
         "SQLAlchemy~=2.0.23",
+        "lxml"
     ],
     long_description="""Coomer Xtractor is a simple tool used to download content from coomer.su. The tool is freely available for use, and contributions from the community are welcomed and appreciated.""",
 
