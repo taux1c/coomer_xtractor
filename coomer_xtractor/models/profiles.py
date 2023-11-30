@@ -36,7 +36,7 @@ class User:
             else:
                 print("Please enter a number greater than 0.")
 
-        self.db_string = f"sqlite:///{self.save_location}/posts.db"
+        self.db_string = f"sqlite:///{self.save_location}/{self.display_name}_posts.db"
         self.save()
 
     def save(self):
