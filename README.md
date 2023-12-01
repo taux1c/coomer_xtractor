@@ -1,52 +1,97 @@
-# coomer_xtractor
 
-Welcome to coomer_xtractor! This project is designed for educational purposes and is not intended for actual use. By using this program, you accept full responsibility for any consequences, and I, as the developer, am not liable for any outcomes resulting from its usage.
+# Coomer Xtractor
+
+This is a simple pip package that allows you to downlaod content from coomer.su. Coomer is a public archiver for onlyfans and fansly accounts. You are then able to create your own archive of the account.
+
+
+
+## Badges
+
+Add badges from somewhere like: [shields.io](https://shields.io/)
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
+## Roadmap
+
+- Add better duplicate detection
+
+- Add facial recognition
+
+- Add better profile handling and adjustments
+
+- Add a search feature or lookup to avoid requireing urls
+
+
+
+## Contributing
+
+Contributions are always welcome!
+
+See `contributing.md` for ways to get started.
+
+Please adhere to this project's `code of conduct`.
+
+
+## Optimizations
+
+This code was created to be easy to use and easy to ensure that you have the most up to date version of the archive. It keeps a database record of urls that have already been downloaded so thaty ou can avoid downloading the same posts over and over. There will be more coming in the future that will allow it to hash individual images and videos to determine if they have already been saved or not to compeletely eliminate duplicates.
+
+
+## FAQ
+
+#### Can I scrape onlyfans or fansly with this?
+
+No, this scraper only works with coomer.su
+
+#### Does this scraper cost anything?
+
+No, there is no fee to use this software. Donations are welcome (see the donations section) but are not required.
+
+
+
 
 ## Installation
 
-You can install `coomer_xtractor` using `pip`:
+Install Coomer Xtractor with pip
 
-bash
-pip install coomer_xtractor
+```bash
+  pip install coomer_xtractor
+```
 
-Please note that pip must be installed in your environment.
 
-Usage
-Starting the Program
-Once coomer_xtractor is installed, you can start the program via the terminal by typing:
+    
+## Deployment
 
+To deploy this project run
+
+```bash
+  coomer
+```
+
+
+## Usage/Examples
+
+```bash
 coomer
+```
 
-This command will launch the program and allow you to use its functionalities.
-
-Using the Installed Package
-If you've installed the package via pip, you can execute the program using:
-
-coomer_xtractor
-
-Manual Installation and Execution
-Alternatively, if you've cloned the repository and installed the program manually, you can run it by following these steps:
-
-git clone https://github.com/taux1c/coomer_xtractor.git
-cd coomer_xtractor
-python3 setup.py install
-
-To start the program:
-
-coomer
+Once you type coomer in the terminal you will see a menu popup, just follow the prompts!
 
 
-Ensure the necessary dependencies are installed before executing the program.
+## Authors
 
-Disclaimer
-This program is intended solely for educational purposes.
-Usage of this program is at your own risk. I am not responsible for any consequences resulting from its use.
-The program is provided "as is" without warranty or guarantees of any kind.
-Contributing
-Contributions via pull requests are welcome! Feel free to contribute to the project by making enhancements, fixing issues, or suggesting new features.
+- [@taux1c](https://www.github.com/taux1c)
 
-Support
-If you find this project helpful and wish to support its development, consider donating.
 
-Thank you for your interest in coomer_xtractor!
+
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at taux1c.software@proton.me
 
