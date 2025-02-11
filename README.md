@@ -1,8 +1,6 @@
 
 # Coomer Xtractor
 
-# IN THE COMING DAYS I WILL BE RELEASING A NEW MUCH IMPROVED COOMER SCRAPER AND RETIRING ALL OLD COOMER SCRAPERS!
-
 This is a simple pip package that allows you to downlaod content from coomer.su. Coomer is a public archiver for onlyfans and fansly accounts. You are then able to create your own archive of the account.
 
 
