@@ -14,6 +14,7 @@ else:
     hdl = True
 
 async def find_files(urls, profile):
+    print("Finding files")
     requests_semaphore = Semaphore(profile.max_concurrent_requests)
     site = urls[0][0].split("/")[3]
     user = urls[0][0].split("/")[5]

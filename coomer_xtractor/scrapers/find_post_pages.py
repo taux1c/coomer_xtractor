@@ -57,6 +57,7 @@ async def find_media_posts(urls):
 
 
 async def scrape_posts(urls):
+    print("Getting Posts")
     if len(urls) > 0:
         post_urls = []
         await find_media_posts(urls)

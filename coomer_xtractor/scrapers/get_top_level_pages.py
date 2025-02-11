@@ -9,6 +9,7 @@ else:
     hdl = True
 
 async def get_pages(url):
+    print("Getting Pages")
     async with async_playwright() as p:
         # Launch the browser and create a page
         browser = await p.chromium.launch(headless=hdl)
