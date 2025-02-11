@@ -4,3 +4,6 @@ bs4~=0.0.1
 beautifulsoup4~=4.12.2
 setuptools~=68.2.0
 SQLAlchemy~=2.0.23
+playwright~=1.50.0
+Faker~=36.1.0
+tqdm~=4.67.1

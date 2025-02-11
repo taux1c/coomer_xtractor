@@ -6,6 +6,8 @@ import webbrowser
 
 from coomer_xtractor.config import profiles_folder
 
+from ..config import dev_mode
+
 
 class User:
 
@@ -92,7 +94,8 @@ async def delete_profile():
     print(f"Deleted {p.display_name}.")
 
 def start():
-    try:
-        webbrowser.open("https://www.buymeacoffee.com/taux1c")
-    except:
-        print("Please consider supporting the developer by visiting https://www.buymeacoffee.com/taux1c")
+    if not dev_mode:
+        try:
+            webbrowser.open("https://www.buymeacoffee.com/taux1c")
+        except:
+            print("Please consider supporting the developer by visiting https://www.buymeacoffee.com/taux1c")
