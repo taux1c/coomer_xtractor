@@ -1,9 +1,34 @@
-from playwright.async_api import async_playwright
+from httpx import AsyncClient, RequestError, ConnectTimeout
 import aiofiles
 from asyncio import Semaphore
 from pathlib import Path
+from faker import Faker
+import backoff
 
 from coomer_xtractor.scrapers.add_to_database import add_to_database, not_in_database
+
+
+# Initialize Faker instance
+fake = Faker()
+
+# Function to generate random headers using Faker
+def generate_headers():
+    return {
+        "User-Agent": fake.user_agent(),
+        "Accept-Language": fake.language_code(),
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "TE": "Trailers"
+    }
+
+# Retry logic with backoff
+def on_backoff(details):
+    print(f"Backing off for {details['wait']} seconds due to {details['exception']}.")
+
+@backoff.on_exception(backoff.expo, (RequestError, ConnectTimeout), max_tries=5, on_backoff=on_backoff)
+async def fetch_url(client, url, headers):
+    return await client.get(url, headers=headers, timeout=30.0)  # Adjusted timeout
 
 
 async def download(urls, profile, site, user, loop):
@@ -11,51 +36,22 @@ async def download(urls, profile, site, user, loop):
     download_path.mkdir(parents=True, exist_ok=True)
     download_semaphore = Semaphore(profile.max_concurrent_downloads)
     saved_urls = []
-
     async with download_semaphore:
-        async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)  # Launch browser in headless mode
-            page = await browser.new_page()
-
-            # Define a custom download path for Playwright
-            download_dir = str(download_path)  # Set download folder to be used by Playwright
-            await page.set_download_behavior(behavior='save', download_path=download_dir)  # Set download path
-
+        async with AsyncClient(follow_redirects=True) as client:
             urls = [x for x in urls if x is not None]
             for url in not_in_database(urls, profile):
                 try:
-                    # Go to the page and retrieve the response
-                    response = await page.goto(url)
-
-                    # Check for content type in response headers
-                    content_type = response.headers.get('content-type', '')
-
-                    # If it's a binary file (image/video)
-                    if 'image' in content_type or 'video' in content_type:
-                        file_name = url.split("/")[-1][-20:]  # Extract file name
-                        file_path = Path(download_path, file_name)
-
-                        # Save the binary content of the file
-                        async with aiofiles.open(file_path, "wb") as f:
-                            await f.write(await response.body())  # Write binary data to file
-                        saved_urls.append(url)
-                        print(f"Downloaded {file_name} to {download_path}.")
-                    else:
-                        # If it's not a binary file, save it as HTML content
-                        await page.wait_for_load_state('networkidle', timeout=60000)  # Wait for 60 seconds
-                        file_name = url.split("/")[-1][-20:]  # Extract file name
-                        file_path = Path(download_path, file_name)
-
-                        # Get page content for non-binary file types (e.g., HTML)
-                        content = await page.content()
-                        async with aiofiles.open(file_path, "wb") as f:
-                            await f.write(content.encode())  # Encode HTML content and write
-                        saved_urls.append(url)
-                        print(f"Downloaded {file_name} to {download_path}.")
-
-                except Exception as e:
-                    print(f"Encountered {e} while trying to download {url}.")
-
-            await browser.close()
-
+                    headers = generate_headers()  # Use the generated headers here
+                    r = await fetch_url(client, url, headers)  # Use fetch_url with retry logic
+                    if r.status_code == 200:
+                        if "f=" in url:
+                            file_name = url.split("f=")[-1]
+                        else:
+                            file_name = url.split("/")[-1][-20:]
+                        async with aiofiles.open(Path(download_path, file_name), "wb") as f:
+                            await f.write(r.content)
+                            saved_urls.append(url)
+                            print(f"Downloaded {file_name} to {download_path}.")
+                except Exception as e:  # Catch all exceptions here
+                    print(f"Encountered exception: {type(e).__name__} with args: {e.args} while trying to download {url}.")
     await add_to_database(saved_urls, profile)
