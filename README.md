@@ -12,6 +12,7 @@ This is a simple pip package that allows you to downlaod content from coomer.su.
 ![Build Status](https://img.shields.io/github/workflow/status/taux1c/coomer_xtractor/CI%20Build)
 
 
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
