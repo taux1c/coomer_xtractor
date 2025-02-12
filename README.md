@@ -9,6 +9,8 @@ This is a simple pip package that allows you to downlaod content from coomer.su.
 
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+![Build Status](https://img.shields.io/github/workflow/status/taux1c/coomer_xtractor/CI%20Build)
+
 
 ## License
 
