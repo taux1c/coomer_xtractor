@@ -62,6 +62,11 @@ Install Coomer Xtractor with pip
   pip install coomer_xtractor
 ```
 
+after installing you will need to run
+```bash
+playwright install
+```
+
 
     
 ## Deployment
