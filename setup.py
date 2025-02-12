@@ -20,14 +20,13 @@ setup(
         "httpx~=0.25.2",
         "bs4~=0.0.1",
         "beautifulsoup4~=4.12.2",
-        "setuptools",
+        "setuptools",  # Latest version
         "SQLAlchemy~=2.0.23",
         "playwright~=1.50.0",
         "Faker~=36.1.0",
         "cowsay~=6.1",
         "backoff~=2.2.1"
     ],
-
     long_description="""Coomer Xtractor is a simple tool used to download content from coomer.su. The tool is freely available for use, and contributions from the community are welcomed and appreciated.""",
 
 )
