@@ -64,13 +64,18 @@ No, there is no fee to use this software. Donations are welcome (see the donatio
 Install Coomer Xtractor with pip
 
 ```bash
-  pip install coomer_xtractor
+pip install playwright
 ```
-
-after installing you will need to run
 ```bash
 playwright install
 ```
+```bash
+pip install lxml
+```
+```bash
+pip install coomer_xtractor
+```
+
 
 
     
